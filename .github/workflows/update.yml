@@ -1,0 +1,31 @@
+name: Update AirVPN  Data
+
+on:
+  schedule:
+    - cron: '0 */1 * * *'  # Run every 1 hour
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Download latest lists
+        run: bash airvpn.sh > Readme.md
+      
+      - name: Force add and commit
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add -f Readme.md
+          git status
+          if git status --porcelain | grep -q '^?? \|^A  \|^M  '; then
+            echo "Changes detected, committing..."
+            git commit -m "Update"
+            git push
+          else
+            echo "No changes to commit"
+          fi 
