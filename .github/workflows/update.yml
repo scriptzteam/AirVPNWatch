@@ -2,7 +2,7 @@ name: Update AirVPN  Data
 
 on:
   schedule:
-    - cron: '0 */1 * * *'  # Run every 1 hour
+    - cron: '*/5 * * * *'  # Run every 5 minutes
   workflow_dispatch:  # Allow manual trigger
 
 jobs:
