@@ -1,4 +1,4 @@
-name: Update AirVPN  Data
+name: Update AirVPN Data
 
 on:
   schedule:
@@ -18,8 +18,8 @@ jobs:
       
       - name: Force add and commit
         run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
+          git config --local user.email "scriptzteam@gmail.com"
+          git config --local user.name "scriptzteam"
           git add -f Readme.md
           git status
           if git status --porcelain | grep -q '^?? \|^A  \|^M  '; then
